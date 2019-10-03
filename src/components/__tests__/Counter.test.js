@@ -7,7 +7,7 @@ let tools;
 
 beforeEach(() => {
   rtl.cleanup();
-  tools = rtl.render(<Counter user='Peter' />);
+  tools = rtl.render(<Counter user='Peter' countLimit={10} />);
 });
 
 describe('Counter component', () => {
@@ -64,18 +64,41 @@ describe('Counter component', () => {
 
   it('prevents the count from going over an upper limit', () => {
     // implement
-    
+    const incButton = tools.queryByTestId('incButton');
+
+    for (let i=1; i<=10; i++) {
+      rtl.fireEvent.click(incButton);
+      expect(tools.queryByText(/11/)).not.toBeInTheDocument();
+    }
   });
 
   it('prevents the count from going under a lower limit', () => {
     // implement
+    const decButton = tools.queryByTestId('decButton');
+
+    for (let i=1; i<=10; i++) {
+      rtl.fireEvent.click(decButton);
+      expect(tools.queryByText(/-11/)).not.toBeInTheDocument();
+    }
   });
 
   it('shows a warning once we hit the upper limit of the counter', () => {
     // implement
+    const incButton = tools.queryByTestId('incButton');
+
+    for (let i=1; i<=10; i++) {
+      rtl.fireEvent.click(incButton);
+    }
+    expect(tools.queryByText(/as high as/)).toBeInTheDocument();
   });
 
   it('shows a warning once we hit the lower limit of the counter', () => {
     // implement
+    const decButton = tools.queryByTestId('incButton');
+
+    for (let i=1; 1<=10; i++) {
+      rtl.fireEvent.click(decButton);
+    }
+    expect(tools.queryByText(/as low as/)).toBeInTheDocument();
   });
 });
