@@ -28,6 +28,15 @@ describe('sum', () => {
 
 describe('multiply', () => {
   // write tests! <================================================
+  it('throws if fed element which is not a number', () => {
+    expect(() => helpers.multiply('1','4')).toThrow();
+  })
+  it('multiplies numbers together', () => {
+    expect(helpers.multiply(1, 6)).toBe(6);
+  })
+  it('can multiply negative numbers', () => {
+    expect(helpers.multiply(-1, 6)).toBe(-6);
+  })
 });
 
 describe('personMaker', () => {
@@ -41,4 +50,12 @@ describe('personMaker', () => {
   });
 
   // write more tests! <===========================================
+  // it('returns ', () => {
+  //   expect(helpers.personMaker('sam', 22))
+  //   .not.toMatchObject({
+  //     id: '123',
+  //     name: 'sam',
+  //     age: 21,
+  //   })
+  // })
 });
