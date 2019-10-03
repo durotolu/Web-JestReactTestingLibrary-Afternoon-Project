@@ -39,14 +39,32 @@ describe('Counter component', () => {
 
   it('can decrement the count by one by clicking decrement', () => {
     // implement
+    const decButton = tools.queryByTestId('decButton');
+
+    expect(tools.queryByText(/0/)).toBeInTheDocument();
+    expect(tools.queryByText(/1/)).not.toBeInTheDocument();
+
+    rtl.fireEvent.click(decButton);
+    expect(tools.queryByText(/0/)).not.toBeInTheDocument();
+    expect(tools.queryByText(/1/)).toBeInTheDocument();
+
+    rtl.fireEvent.click(decButton);
+    expect(tools.queryByText(/1/)).not.toBeInTheDocument();
+    expect(tools.queryByText(/2/)).toBeInTheDocument();
   });
 
   it('can reset the count clicking rest', () => {
     // implement
+    const resetButton = tools.queryByTestId('resetButton');
+
+    rtl.fireEvent.click(resetButton);
+    expect(tools.queryByText(/0/)).toBeInTheDocument();
+    expect(tools.queryByText(/2/)).not.toBeInTheDocument();
   });
 
   it('prevents the count from going over an upper limit', () => {
     // implement
+    
   });
 
   it('prevents the count from going under a lower limit', () => {
